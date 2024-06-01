@@ -90,13 +90,21 @@ Memory management is crucial in C programs to avoid leaks.
     - Uses functions like `create_token`, `add_token_to_list`.
 
     Example for logic Lexer:
-    - Input: ls -l | grep "pattern" > output.txt
+    - Input: `ls -l | grep "pattern" > output.txt`
     - Tokens: `ls` , `-l` , `|` , `grep` , `pattern` , `>` , `output.txt` .
 
 2. **Parser Logic**:
     - Constructs command structures from tokens.
     - Implements syntax rules for sequences, pipes, and redirections.
-    - Example:
+
+    Example for Parser Logic:
+    - Tokens: `ls` , `-l` , `|` , `grep` , `pattern` , `>` , `output.txt` .
+    - Parse Tree:
+      - Command: `ls -l`
+      - Pipe to: `grep "pattern"`
+      - Redirect output to: `output.txt`
+
+    - Code Example:
       ```c
       while (tokens)
       {
@@ -153,6 +161,7 @@ Memory management is crucial in C programs to avoid leaks.
 
 ### Exit Status
 
+The exit status indicates the result of the last executed command. In UNIX-like systems, an exit status of 0 typically means success, while a non-zero value indicates an error.
 - Stored in a global variable.
 - Accessible via `$?` in the shell.
 
