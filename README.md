@@ -267,6 +267,23 @@ void execute_command(t_command *cmd); // executes
 
 - **Repeat**: The shell repeats the loop, waiting for the next user input.
 
+## Visual Diagram
+
+```mermaid
+graph TD;
+    A[Input Command] --> B[Lexer] --> C[Parser] --> D{Command Structure}
+    D --> E[Executor]
+    E --> F[Builtin Commands]
+    E --> G[External Commands]
+    F --> H[cd, echo, env, exit, export, pwd, unset]
+    G --> I[Redirections]
+    G --> J[Pipes]
+    I --> K[<, >, >>]
+    J --> L[pipe]
+    E --> M[Exit Status]
+    E --> N[Memory Management]
+```
+
 ### Detailed Logic Flowchart
 ```plaintext
 +----------------------+
@@ -336,23 +353,6 @@ void execute_command(t_command *cmd); // executes
 +----------+-------------+         |
 |  Repeat Main Loop      |---------+
 +----------+-------------+
-```
-
-## Visual Diagram
-
-```mermaid
-graph TD;
-    A[Input Command] --> B[Lexer] --> C[Parser] --> D{Command Structure}
-    D --> E[Executor]
-    E --> F[Builtin Commands]
-    E --> G[External Commands]
-    F --> H[cd, echo, env, exit, export, pwd, unset]
-    G --> I[Redirections]
-    G --> J[Pipes]
-    I --> K[<, >, >>]
-    J --> L[pipe]
-    E --> M[Exit Status]
-    E --> N[Memory Management]
 ```
 
 This detailed documentation covers the main aspects of the `minishell` project, including its structure, parser, lexer, redirections, pipes, exit status, builtins, and memory management. It provides a foundation for understanding how each component functions and interacts within the shell.
