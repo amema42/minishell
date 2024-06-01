@@ -165,7 +165,7 @@ graph TD;
     G --> I[Redirections]
     G --> J[Pipes]
     I --> K[<, >, >>]
-    J --> L[pipe()]
+    J --> L[pipe]
     E --> M[Exit Status]
     E --> N[Memory Management]
 ```
