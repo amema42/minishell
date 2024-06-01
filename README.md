@@ -179,6 +179,15 @@ Memory management is crucial in C programs to avoid leaks.
 
 - Ensures all allocated memory is freed.
 - Uses functions like `free_command_structure` to clean up.
+## Process Flow
+To understand the pure logic of the shell program, it's helpful to break it down into its core components and their interactions.
+
+### Core Components and Logic
+ - #### Initialization #### -
+ The shell initializes by setting up necessary data structures and environment variables.
+
+- #### Main Loop #### -
+  The shell enters a main loop where it continuously waits for user input.
 
 ## Visual Diagram
 
