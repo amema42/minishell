@@ -184,13 +184,98 @@ To understand the pure logic of the shell program, it's helpful to break it down
 
 ### Core Components and Logic
  - #### Initialization
+ Start Shell: This is the entry point where the shell program begins execution.
  The shell initializes by setting up necessary data structures and environment variables.
+ Initialize Shell: The shell sets up any necessary data structures and environment variables. This step prepares the shell for operation.
 
  - #### Main Loop
-  The shell enters a main loop where it continuously waits for user input.
+  The shell enters a main loop where it continuously waits for user input. This loop only breaks when the user exits the shell.
 
-  - ### Parsing
-  The input is tokenized and parsed into a structured format that the shell can understand (e.g., separating the command and its arguments).
+  - #### Parsing
+  before Parsing explanation: Display Prompt and Read Input: The shell displays a prompt (e.g., $ ) to the user and waits for the user to type a command.
+  Than, the input is tokenized and parsed into a structured format that the shell can understand (e.g., separating the command and its arguments).
+
+  - #### Command Execution
+  The shell determines whether the command is a built-in command or an external program.If it is a built-in command, the corresponding function is called. If it is an external program, the shell uses fork to create a new process and exec to run the program.
+  The shell handles redirections (input/output) and pipes if specified.
+
+  - ### Waiting for Completion
+  The shell waits for the command to complete if it is running in the foreground.
+  For background processes, it immediately returns to the prompt. The shell outputs the results of the command execution (if any) to the terminal.
+
+  - ### & Repeat
+  The shell repeats the loop, waiting for the next user input.
+
+### Detailed Logic Flowchart
+```plaintext
++----------------------+
+|  Start Shell         |
++----------+-----------+
+           |
+           v
++----------+-----------+
+|  Initialize Shell    |
+|  (setup structures,  |
+|  env variables)      |
++----------+-----------+
+           |
+           v
++----------+-----------+
+|  Main Loop           |
++----------+-----------+
+           |
+           v
++----------+-----------+
+|  Display Prompt      |
+|  and Read Input      |
++----------+-----------+
+           |
+           v
++----------+-----------+
+|  Parse Input         |
+|  (tokenize, parse    |
+|  command & args)     |
++----------+-----------+
+           |
+           v
++----------+-----------+
+|  Is Built-in Command?|
++------+---+-----------+
+       |   |
+       v   v
++------v---+-------------+  No
+|  Execute Built-in      | <-------+
+|  Command               |         |
++----------+-------------+         |
+           |                       |
+           v                       |
++----------+-------------+         |
+|  Execute External      |         |
+|  Command (fork, exec)  |         |
++----------+-------------+         |
+           |                       |
+           v                       |
++----------+-------------+         |
+|  Handle Redirections   |         |
+|  and Pipes             |         |
++----------+-------------+         |
+           |                       |
+           v                       |
++----------+-------------+         |
+|  Wait for Command      |         |
+|  to Complete           |         |
++----------+-------------+         |
+           |                       |
+           v                       |
++----------+-------------+         |
+|  Output Results        |         |
++----------+-------------+         |
+           |                       |
+           v                       |
++----------+-------------+         |
+|  Repeat Main Loop      |---------+
++----------+-------------+
+```
 
 ## Visual Diagram
 
