@@ -163,7 +163,21 @@ Memory management is crucial in C programs to avoid leaks.
 
 The exit status indicates the result of the last executed command. In UNIX-like systems, an exit status of 0 typically means success, while a non-zero value indicates an error.
 - Stored in a global variable.
-- Accessible via `$?` in the shell.
+- Accessible via `$?` in the shell. (function implemented in the echo builtin)
+
+#### Example
+```c
+// exit_status.c
+#include "exit_status.h"
+
+void set_exit_status(int status) {
+    g_shell_status = status;
+}
+
+int get_exit_status() {
+    return g_shell_status;
+}
+```
 
 ### Builtin Commands
 
