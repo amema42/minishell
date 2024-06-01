@@ -1,6 +1,10 @@
 # Minishell
 MiniShell is a simple UNIX shell implementation written in C. It supports basic shell functionalities including command execution, built-in commands, input parsing, and more. This project serves as a foundational example of how a shell works at a low level. Here's a detailed technical documentation and analysis of the `minishell` project, focusing on its structure and key components such as the parser, lexer,  builtins, redirections, pipes, exit status, and ofc - leak checks.
 
+***
+In this documentation (README.md) some code fractions in order to make the explanation of this project as clear as possible may not correspond to the source code of this project
+***
+
 
 ## Project Structure
 ```
@@ -223,7 +227,7 @@ To understand the pure logic of the shell program, it's helpful to break it down
   Than, the input is tokenized and parsed into a structured format that the shell can understand (e.g., separating the command and its arguments).
 
   - #### Command Execution
-  The shell determines whether the command is a built-in command or an external program.If it is a built-in command, the corresponding function is called. If it is an external program, the shell uses fork to create a new process and exec to run the program.
+  The shell determines whether the command is a built-in command or an external program.If it is a built-in command, the corresponding function is called. If it is an external program, the shell uses `fork` to create a new process and `exec` to run the program.
   The shell handles redirections (input/output) and pipes if specified.
 
   - #### Waiting for Completion
@@ -323,8 +327,12 @@ graph TD;
 
 This detailed documentation covers the main aspects of the `minishell` project, including its structure, parser, lexer, redirections, pipes, exit status, builtins, and memory management. It provides a foundation for understanding how each component functions and interacts within the shell.
 
+```css
 This `README.md` file consolidates all the detailed explanations, code examples, and logical flow of this MiniShell project.
+```
 
 ## Author & License
-Group project by [Ani Mema](https://github.com/amema42) and [Jacopo Cardinaux](https://github.com/raviolotto).
+
+This `README.md` file provides a detailed overview of the project, its structure, and functionality. It should help users and developers understand how to build, run, and extend the MiniShell project. &#8203;:citation[【oaicite:0】]&#8203;
+Group project by [Ani Mema](https://github.com/amema42) ,  [Jacopo Cardinaux](https://github.com/raviolotto) , [Luca Morelli](https://github.com/lmorelli333) and [Francesco Dal Savio](https://github.com/francescodalsavio)
 This project is licensed under the MIT License.
