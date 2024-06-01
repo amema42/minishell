@@ -226,7 +226,7 @@ To understand the pure logic of the shell program, it's helpful to break it down
   The shell determines whether the command is a built-in command or an external program.If it is a built-in command, the corresponding function is called. If it is an external program, the shell uses fork to create a new process and exec to run the program.
   The shell handles redirections (input/output) and pipes if specified.
 
-  - ### Waiting for Completion
+  - #### Waiting for Completion
   The shell waits for the command to complete if it is running in the foreground.
   For background processes, it immediately returns to the prompt. The shell outputs the results of the command execution (if any) to the terminal.
 
@@ -324,5 +324,7 @@ graph TD;
 This detailed documentation covers the main aspects of the `minishell` project, including its structure, parser, lexer, redirections, pipes, exit status, builtins, and memory management. It provides a foundation for understanding how each component functions and interacts within the shell.
 
 This `README.md` file consolidates all the detailed explanations, code examples, and logical flow of this MiniShell project.
-License
+
+## Author & License
+Group project by [Ani Mema](https://github.com/amema42) and [Jacopo Cardinaux](https://github.com/raviolotto).
 This project is licensed under the MIT License.
