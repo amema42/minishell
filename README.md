@@ -155,13 +155,13 @@ Memory management is crucial in C programs to avoid leaks.
 ### Builtin Commands
 
 - Implemented as functions that directly manipulate the shell's state:
-'cd': Changes the current directory.
-echo: Prints text to the standard output.
-pwd: Prints the current working directory.
-export: Sets environment variables.
-unset: Unsets environment variables.
-env: Prints all environment variables.
-exit: Exits the shell.
+`cd`: Changes the current directory.
+`echo`: Prints text to the standard output.
+`pwd`: Prints the current working directory.
+`export`: Sets environment variables.
+`unset`: Unsets environment variables.
+`env`: Prints all environment variables.
+`exit`: Exits the shell.
 
 
 - Example for `cd`:
