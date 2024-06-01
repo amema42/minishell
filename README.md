@@ -183,11 +183,14 @@ Memory management is crucial in C programs to avoid leaks.
 To understand the pure logic of the shell program, it's helpful to break it down into its core components and their interactions.
 
 ### Core Components and Logic
- - #### Initialization #### -
+ - #### Initialization
  The shell initializes by setting up necessary data structures and environment variables.
 
-- #### Main Loop #### -
+ - #### Main Loop
   The shell enters a main loop where it continuously waits for user input.
+
+  - ### Parsing
+  The input is tokenized and parsed into a structured format that the shell can understand (e.g., separating the command and its arguments).
 
 ## Visual Diagram
 
