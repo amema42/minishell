@@ -1,18 +1,36 @@
-#Minishell
-Here's a detailed technical documentation and analysis of the `minishell` project, focusing on its structure and key components such as the parser, lexer,  builtins, redirections, pipes, exit status, and leak checks.
+# Minishell
+MiniShell is a simple UNIX shell implementation written in C. It supports basic shell functionalities including command execution, built-in commands, input parsing, and more. This project serves as a foundational example of how a shell works at a low level. Here's a detailed technical documentation and analysis of the `minishell` project, focusing on its structure and key components such as the parser, lexer,  builtins, redirections, pipes, exit status, and ofc - leak checks.
+
 
 ## Project Structure
 ```
 minishell/
-├── includes/       # Header files
-├── lib/            # Libraries (libft and ft_printf)
-├── src/            # Source files
-│   ├── builtin/    # Builtin commands
-│   ├── executor/   # Command execution
-│   ├── parser/     # Parsing and lexing
-│   └── utils/      # Utility functions
-├── Makefile        # Build script
-└── README.md       # Project documentation (this file)
+├── Makefile
+├── README.md (this documentation file)
+├── includes/
+│   ├── builtin.h
+│   ├── executor.h
+│   ├── mini_shell.h
+│   ├── parser.h
+│   ├── structure.h
+│   ├── utils.h
+│   ├── visual.h
+├── lib/
+│   └── libft/
+│       ├── Makefile
+│       ├── *.c
+│       ├── libft.h
+├── src/
+│   ├── builtin/
+│   │   ├── *.c
+│   ├── executor/
+│   │   ├── *.c
+│   ├── parser/
+│   │   ├── *.c
+│   ├── utils/
+│   │   ├── *.c
+│   ├── visual/
+│   │   ├── *.c
 ```
 
 ## Key Components
@@ -131,12 +149,21 @@ Memory management is crucial in C programs to avoid leaks.
 
 ### Exit Status
 
-- Stored in a global variable or a special structure.
+- Stored in a global variable.
 - Accessible via `$?` in the shell.
 
 ### Builtin Commands
 
-- Implemented as functions that directly manipulate the shell's state.
+- Implemented as functions that directly manipulate the shell's state:
+'cd': Changes the current directory.
+echo: Prints text to the standard output.
+pwd: Prints the current working directory.
+export: Sets environment variables.
+unset: Unsets environment variables.
+env: Prints all environment variables.
+exit: Exits the shell.
+
+
 - Example for `cd`:
   ```c
   void my_cd(char **args)
@@ -171,3 +198,7 @@ graph TD;
 ```
 
 This detailed documentation covers the main aspects of the `minishell` project, including its structure, parser, lexer, redirections, pipes, exit status, builtins, and memory management. It provides a foundation for understanding how each component functions and interacts within the shell.
+
+This `README.md` file consolidates all the detailed explanations, code examples, and logical flow of this MiniShell project.
+License
+This project is licensed under the MIT License.
