@@ -1,11 +1,11 @@
 # Minishell
-MiniShell (a 42 School's project) is a simple UNIX shell implementation written in C. It supports basic shell functionalities including command execution, built-in commands, input parsing, and more. This project serves as a foundational example of how a shell works at a low level. Here's a detailed technical documentation and analysis of the `minishell` project, focusing on its structure and key components such as the parser, lexer,  builtins, redirections, pipes, exit status, and ofc - leak checks.
+MiniShell (a 42 School project) is a simple UNIX shell implementation written in C. It supports basic shell functionalities including command execution, built-in commands, input parsing, and more. This project serves as a foundational example of how a shell works at a low level. Here's a detailed technical documentation and analysis of the `minishell` project, focusing on its structure and key components such as the parser, lexer, builtins, redirections, pipes, exit status, and memory leak checks.
 
 ***
-In this documentation (README.md) some code fractions - in order to make the explanation of this project as clear as possible - may not correspond to the source code of this project
+In this documentation (README.md), some code fractions—provided to make the explanation of this project as clear as possible—may not correspond exactly to the source code of this project.
 ***
 
-## Getting Started
+### Getting Started
 ### Prerequisites
 - GCC compiler
 - Make
@@ -112,16 +112,16 @@ Memory management is crucial in C programs to avoid leaks.
     - Handles quotes, escapes, and special characters (e.g., `|`, `<`, `>`).
     - Uses functions like `create_token`, `add_token_to_list`.
 
-    Example for logic Lexer:
+    Example for lexer logic:
     - Input: `ls -l | grep "pattern" > output.txt`
-    - Tokens: `ls` , `-l` , `|` , `grep` , `pattern` , `>` , `output.txt` .
+    - Tokens: `ls`, `-l`, `|`, `grep`, `pattern`, `>`, `output.txt`.
 
 2. **Parser Logic**:
     - Constructs command structures from tokens.
     - Implements syntax rules for sequences, pipes, and redirections.
 
-    Example for Parser Logic:
-    - Tokens: `ls` , `-l` , `|` , `grep` , `pattern` , `>` , `output.txt` .
+    Example for parser logic:
+    - Tokens: `ls`, `-l`, `|`, `grep`, `pattern`, `>`, `output.txt`.
     - Parse Tree:
       - Command: `ls -l`
       - Pipe to: `grep "pattern"`
@@ -186,7 +186,7 @@ Memory management is crucial in C programs to avoid leaks.
 
 The exit status indicates the result of the last executed command. In UNIX-like systems, an exit status of 0 typically means success, while a non-zero value indicates an error.
 - Stored in a global variable.
-- Accessible via `$?` in the shell. (function implemented in the echo builtin)
+- Accessible via `$?` in the shell (implemented in the echo builtin).
 
 #### Example
 ```c
@@ -205,14 +205,13 @@ int get_exit_status() {
 ### Builtin Commands
 
 - Implemented as functions that directly manipulate the shell's state:
-`cd`: Changes the current directory.
-`echo`: Prints text to the standard output.
-`pwd`: Prints the current working directory.
-`export`: Sets environment variables.
-`unset`: Unsets environment variables.
-`env`: Prints all environment variables.
-`exit`: Exits the shell.
-
+  - `cd`: Changes the current directory.
+  - `echo`: Prints text to the standard output.
+  - `pwd`: Prints the current working directory.
+  - `export`: Sets environment variables.
+  - `unset`: Unsets environment variables.
+  - `env`: Prints all environment variables.
+  - `exit`: Exits the shell.
 
 - Example for `cd`:
   ```c
@@ -229,49 +228,44 @@ int get_exit_status() {
 
 - Ensures all allocated memory is freed.
 - Uses functions like `free_command_structure` to clean up.
+
 ## Process Flow
 To understand the pure logic of the shell program, it's helpful to break it down into its core components and their interactions.
 
 ### Core Components and Logic
- - #### Initialization
- Start Shell: This is the entry point where the shell program begins execution.
- The shell initializes by setting up necessary data structures and environment variables.
- Initialize Shell: The shell sets up any necessary data structures and environment variables. This step prepares the shell for operation.
+#### Initialization
+- **Start Shell**: The entry point where the shell program begins execution.
+- **Initialize Shell**: Sets up necessary data structures and environment variables to prepare the shell for operation.
 
- ##### Simple Overview (part one)
- ```c
- void init_shell(t_shell *shell); // initializes the shell struct
- ```
- ```c
- void start_shell(t_shell *shell); // starts the shell, entering the main loop where it waits for the user input
- ```
- - #### Main Loop
-  The shell enters a main loop where it continuously waits for user input. This loop only breaks when the user exits the shell.
+##### Simple Overview (Part One)
+```c
+void init_shell(t_shell *shell); // initializes the shell struct
+```
+```c
+void start_shell(t_shell *shell); // starts the shell, entering the main loop where it waits for user input
+```
 
-  - #### Parsing
-  before Parsing explanation: Display Prompt and Read Input: The shell displays a prompt (e.g., $ ) to the user and waits for the user to type a command.
-  Than, the input is tokenized and parsed into a structured format that the shell can understand (e.g., separating the command and its arguments).
+#### Main Loop
+The shell enters a main loop where it continuously waits for user input. This loop only breaks when the user exits the shell.
 
-  - #### Command Execution
-  The shell determines whether the command is a built-in command or an external program.If it is a built-in command, the corresponding function is called. If it is an external program, the shell uses `fork` to create a new process and `exec` to run the program.
-  The shell handles redirections (input/output) and pipes if specified.
+- **Display Prompt and Read Input**: The shell displays a prompt (e.g., $ ) to the user and waits for the user to type a command.
+- **Parsing**: The input is tokenized and parsed into a structured format that the shell can understand (e.g., separating the command and its arguments).
 
-  ##### Simple Overview (part two)
+- **Command Execution**: The shell determines whether the command is a built-in command or an external program. If it is a built-in command, the corresponding function is called. If it is an external program, the shell uses `fork` to create a new process and `exec` to run the program. The shell handles redirections (input/output) and pipes if specified.
 
-  ```c
-  t_command *parse_input(char *input); // parses the user input and returns a structed command
-  ```
-  ```c
-  void execute_command(t_command *cmd); // execute the given command, handling built-in commands and/or and external programs
-  ```
+##### Simple Overview (Part Two)
+```c
+t_command *parse_input(char *input); // parses the user input and returns a structured command
+```
+```c
+void execute_command(t_command *cmd); // executes
 
+ the given command, handling built-in commands and external programs
+```
 
-  - #### Waiting for Completion
-  The shell waits for the command to complete if it is running in the foreground.
-  For background processes, it immediately returns to the prompt. The shell outputs the results of the command execution (if any) to the terminal.
+- **Waiting for Completion**: The shell waits for the command to complete if it is running in the foreground. For background processes, it immediately returns to the prompt. The shell outputs the results of the command execution (if any) to the terminal.
 
-  - #### & Repeat
-  The shell repeats the loop, waiting for the next user input.
+- **Repeat**: The shell repeats the loop, waiting for the next user input.
 
 ### Detailed Logic Flowchart
 ```plaintext
@@ -365,7 +359,7 @@ This detailed documentation covers the main aspects of the `minishell` project, 
 
 ## Author & License
 
-Group project by [Ani Mema](https://github.com/amema42) ,  [Jacopo Cardinaux](https://github.com/raviolotto) , [Luca Morelli](https://github.com/lmorelli333) and [Francesco Dal Savio](https://github.com/francescodalsavio)
+Group project by [Ani Mema](https://github.com/amema42), [Jacopo Cardinaux](https://github.com/raviolotto), [Luca Morelli](https://github.com/lmorelli333), and [Francesco Dal Savio](https://github.com/francescodalsavio).
 
 This project is licensed under the MIT License.
 ```css
