@@ -89,6 +89,10 @@ Memory management is crucial in C programs to avoid leaks.
     - Handles quotes, escapes, and special characters (e.g., `|`, `<`, `>`).
     - Uses functions like `create_token`, `add_token_to_list`.
 
+    - Example for logic Lexer:
+    Input: ls -l | grep "pattern" > output.txt
+    Tokens: `ls` , `-l` , `|` , `grep` , `pattern` , `>` , `output.txt` .
+
 2. **Parser Logic**:
     - Constructs command structures from tokens.
     - Implements syntax rules for sequences, pipes, and redirections.
