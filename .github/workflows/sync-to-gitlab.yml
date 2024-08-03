@@ -18,8 +18,7 @@ jobs:
         git config --global user.email 'github-actions@github.com'
 
     - name: Add GitLab remote
-      run: |
-        git remote add gitlab https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.com/amema42/minishell.git
+      run: git remote add gitlab https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.com/amema42/minishell.git
 
     - name: Pull from GitLab
       run: git pull gitlab main --rebase
