@@ -9,16 +9,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
     - name: Set up Git
       run: |
         git config --global user.name 'github-actions'
         git config --global user.email 'github-actions@github.com'
 
+    - name: Add GitLab remote
+      run: |
+        git remote add gitlab https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.com/amema42/minishell.git
+
+    - name: Pull from GitLab
+      run: git pull gitlab main --rebase
+
     - name: Push to GitLab
       env:
         GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
-      run: |
-        git remote add gitlab https://gitlab-ci-token:${{ secrets.GITLAB_TOKEN }}@gitlab.com/amema42/minishell.git
-        git push gitlab main
+      run: git push gitlab main
