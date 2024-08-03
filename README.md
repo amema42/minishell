@@ -418,8 +418,6 @@ flowchart TD
     K --> C[Repeat Main Loop]
 ```
 
-In this version, I've replaced parentheses with `<br/>` tags to ensure that Mermaid properly parses the multiline text. This should resolve the parsing errors.
-
 This detailed documentation covers the main aspects of the `minishell` project, including its structure, parser, lexer, redirections, pipes, exit status, builtins, and memory management. It provides a foundation for understanding how each component functions and interacts within the shell.
 
 ## Author & License
