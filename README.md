@@ -26,34 +26,151 @@ After building the project, you can run the shell with:
 ```
 
 ## Project Structure
-```
-minishell/
-├── Makefile
-├── README.md (this documentation file)
-├── includes/
-│   ├── builtin.h
-│   ├── executor.h
-│   ├── mini_shell.h
-│   ├── parser.h
-│   ├── structure.h
-│   ├── utils.h
-│   ├── visual.h
-├── lib/
-│   └── libft/
-│       ├── Makefile
-│       ├── *.c
-│       ├── libft.h
-├── src/
-│   ├── builtin/
-│   │   ├── *.c
-│   ├── executor/
-│   │   ├── *.c
-│   ├── parser/
-│   │   ├── *.c
-│   ├── utils/
-│   │   ├── *.c
-│   ├── visual/
-│   │   ├── *.c
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.tree ul {
+    padding-top: 20px; position: relative;
+    transition: all 0.5s;
+}
+.tree li {
+    float: left; text-align: center;
+    list-style-type: none;
+    position: relative;
+    padding: 20px 5px 0 5px;
+    transition: all 0.5s;
+}
+.tree li::before, .tree li::after {
+    content: '';
+    position: absolute; top: 0; right: 50%;
+    border-top: 2px solid #ccc;
+    width: 50%; height: 20px;
+}
+.tree li::after{
+    right: auto; left: 50%;
+    border-left: 2px solid #ccc;
+}
+.tree li:only-child::after, .tree li:only-child::before {
+    display: none;
+}
+.tree li:only-child{ padding-top: 0;}
+.tree li:first-child::before, .tree li:last-child::after{
+    border: 0 none;
+}
+.tree li:last-child::before{
+    border-right: 2px solid #ccc;
+    border-radius: 0 5px 0 0;
+}
+.tree li:first-child::after{
+    border-radius: 5px 0 0 0;
+}
+.tree ul ul::before{
+    content: '';
+    position: absolute; top: 0; left: 50%;
+    border-left: 2px solid #ccc;
+    width: 0; height: 20px;
+}
+.tree li a{
+    border: 2px solid #ccc;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #666;
+    font-family: arial, verdana, tahoma;
+    font-size: 11px;
+    display: inline-block;
+    border-radius: 5px;
+    transition: all 0.5s;
+}
+.tree li a:hover, .tree li a:hover+ul li a {
+    background: #c8e4f8; color: #000; border: 2px solid #94a0b4;
+}
+.tree li a:hover+ul li::after, 
+.tree li a:hover+ul li::before, 
+.tree li a:hover+ul::before, 
+.tree li a:hover+ul ul::before{
+    border-color:  #94a0b4;
+}
+</style>
+</head>
+<body>
+
+<div class="tree">
+    <ul>
+        <li>
+            <a href="#">minishell/</a>
+            <ul>
+                <li><a href="#">Makefile</a></li>
+                <li><a href="#">README.md</a></li>
+                <li>
+                    <a href="#">includes/</a>
+                    <ul>
+                        <li><a href="#">builtin.h</a></li>
+                        <li><a href="#">executor.h</a></li>
+                        <li><a href="#">mini_shell.h</a></li>
+                        <li><a href="#">parser.h</a></li>
+                        <li><a href="#">structure.h</a></li>
+                        <li><a href="#">utils.h</a></li>
+                        <li><a href="#">visual.h</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">lib/</a>
+                    <ul>
+                        <li>
+                            <a href="#">libft/</a>
+                            <ul>
+                                <li><a href="#">Makefile</a></li>
+                                <li><a href="#">*.c</a></li>
+                                <li><a href="#">libft.h</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">src/</a>
+                    <ul>
+                        <li>
+                            <a href="#">builtin/</a>
+                            <ul>
+                                <li><a href="#">*.c</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">executor/</a>
+                            <ul>
+                                <li><a href="#">*.c</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">parser/</a>
+                            <ul>
+                                <li><a href="#">*.c</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">utils/</a>
+                            <ul>
+                                <li><a href="#">*.c</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">visual/</a>
+                            <ul>
+                                <li><a href="#">*.c</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>
 ```
 
 ## Key Components
@@ -285,75 +402,23 @@ graph TD;
 ```
 
 ### Detailed Logic Flowchart
-```plaintext
-+----------------------+
-|  Start Shell         |
-+----------+-----------+
-           |
-           v
-+----------+-----------+
-|  Initialize Shell    |
-|  (setup structures,  |
-|  env variables)      |
-+----------+-----------+
-           |
-           v
-+----------+-----------+
-|  Main Loop           |
-+----------+-----------+
-           |
-           v
-+----------+-----------+
-|  Display Prompt      |
-|  and Read Input      |
-+----------+-----------+
-           |
-           v
-+----------+-----------+
-|  Parse Input         |
-|  (tokenize, parse    |
-|  command & args)     |
-+----------+-----------+
-           |
-           v
-+----------+-----------+
-|  Is Built-in Command?|
-+------+---+-----------+
-       |   |
-       v   v
-+------v---+-------------+  No
-|  Execute Built-in      | <-------+
-|  Command               |         |
-+----------+-------------+         |
-           |                       |
-           v                       |
-+----------+-------------+         |
-|  Execute External      |         |
-|  Command (fork, exec)  |         |
-+----------+-------------+         |
-           |                       |
-           v                       |
-+----------+-------------+         |
-|  Handle Redirections   |         |
-|  and Pipes             |         |
-+----------+-------------+         |
-           |                       |
-           v                       |
-+----------+-------------+         |
-|  Wait for Command      |         |
-|  to Complete           |         |
-+----------+-------------+         |
-           |                       |
-           v                       |
-+----------+-------------+         |
-|  Output Results        |         |
-+----------+-------------+         |
-           |                       |
-           v                       |
-+----------+-------------+         |
-|  Repeat Main Loop      |---------+
-+----------+-------------+
+
+```mermaid
+flowchart TD
+    A[Start Shell] --> B[Initialize Shell<br/>(setup structures,<br/>env variables)]
+    B --> C[Main Loop]
+    C --> D[Display Prompt<br/>and Read Input]
+    D --> E[Parse Input<br/>(tokenize, parse<br/>command & args)]
+    E --> F{Is Built-in Command?}
+    F -->|Yes| G[Execute Built-in<br/>Command]
+    F -->|No| H[Execute External<br/>Command (fork, exec)]
+    H --> I[Handle Redirections<br/>and Pipes]
+    I --> J[Wait for Command<br/>to Complete]
+    J --> K[Output Results]
+    K --> C[Repeat Main Loop]
 ```
+
+In this version, I've replaced parentheses with `<br/>` tags to ensure that Mermaid properly parses the multiline text. This should resolve the parsing errors.
 
 This detailed documentation covers the main aspects of the `minishell` project, including its structure, parser, lexer, redirections, pipes, exit status, builtins, and memory management. It provides a foundation for understanding how each component functions and interacts within the shell.
 
