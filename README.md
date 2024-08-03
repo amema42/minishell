@@ -27,150 +27,34 @@ After building the project, you can run the shell with:
 
 ## Project Structure
 
-```html
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-.tree ul {
-    padding-top: 20px; position: relative;
-    transition: all 0.5s;
-}
-.tree li {
-    float: left; text-align: center;
-    list-style-type: none;
-    position: relative;
-    padding: 20px 5px 0 5px;
-    transition: all 0.5s;
-}
-.tree li::before, .tree li::after {
-    content: '';
-    position: absolute; top: 0; right: 50%;
-    border-top: 2px solid #ccc;
-    width: 50%; height: 20px;
-}
-.tree li::after{
-    right: auto; left: 50%;
-    border-left: 2px solid #ccc;
-}
-.tree li:only-child::after, .tree li:only-child::before {
-    display: none;
-}
-.tree li:only-child{ padding-top: 0;}
-.tree li:first-child::before, .tree li:last-child::after{
-    border: 0 none;
-}
-.tree li:last-child::before{
-    border-right: 2px solid #ccc;
-    border-radius: 0 5px 0 0;
-}
-.tree li:first-child::after{
-    border-radius: 5px 0 0 0;
-}
-.tree ul ul::before{
-    content: '';
-    position: absolute; top: 0; left: 50%;
-    border-left: 2px solid #ccc;
-    width: 0; height: 20px;
-}
-.tree li a{
-    border: 2px solid #ccc;
-    padding: 5px 10px;
-    text-decoration: none;
-    color: #666;
-    font-family: arial, verdana, tahoma;
-    font-size: 11px;
-    display: inline-block;
-    border-radius: 5px;
-    transition: all 0.5s;
-}
-.tree li a:hover, .tree li a:hover+ul li a {
-    background: #c8e4f8; color: #000; border: 2px solid #94a0b4;
-}
-.tree li a:hover+ul li::after, 
-.tree li a:hover+ul li::before, 
-.tree li a:hover+ul::before, 
-.tree li a:hover+ul ul::before{
-    border-color:  #94a0b4;
-}
-</style>
-</head>
-<body>
-
-<div class="tree">
-    <ul>
-        <li>
-            <a href="#">minishell/</a>
-            <ul>
-                <li><a href="#">Makefile</a></li>
-                <li><a href="#">README.md</a></li>
-                <li>
-                    <a href="#">includes/</a>
-                    <ul>
-                        <li><a href="#">builtin.h</a></li>
-                        <li><a href="#">executor.h</a></li>
-                        <li><a href="#">mini_shell.h</a></li>
-                        <li><a href="#">parser.h</a></li>
-                        <li><a href="#">structure.h</a></li>
-                        <li><a href="#">utils.h</a></li>
-                        <li><a href="#">visual.h</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">lib/</a>
-                    <ul>
-                        <li>
-                            <a href="#">libft/</a>
-                            <ul>
-                                <li><a href="#">Makefile</a></li>
-                                <li><a href="#">*.c</a></li>
-                                <li><a href="#">libft.h</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">src/</a>
-                    <ul>
-                        <li>
-                            <a href="#">builtin/</a>
-                            <ul>
-                                <li><a href="#">*.c</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">executor/</a>
-                            <ul>
-                                <li><a href="#">*.c</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">parser/</a>
-                            <ul>
-                                <li><a href="#">*.c</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">utils/</a>
-                            <ul>
-                                <li><a href="#">*.c</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">visual/</a>
-                            <ul>
-                                <li><a href="#">*.c</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-    </ul>
-</div>
-
-</body>
-</html>
+```plaintext
+minishell/
+├── 📄 Makefile
+├── 📄 README.md
+├── 📂 includes/
+│   ├── 📄 builtin.h
+│   ├── 📄 executor.h
+│   ├── 📄 mini_shell.h
+│   ├── 📄 parser.h
+│   ├── 📄 structure.h
+│   ├── 📄 utils.h
+│   └── 📄 visual.h
+├── 📂 lib/
+│   └── 📂 libft/
+│       ├── 📄 Makefile
+│       ├── 📄 *.c
+│       └── 📄 libft.h
+└── 📂 src/
+    ├── 📂 builtin/
+    │   └── 📄 *.c
+    ├── 📂 executor/
+    │   └── 📄 *.c
+    ├── 📂 parser/
+    │   └── 📄 *.c
+    ├── 📂 utils/
+    │   └── 📄 *.c
+    └── 📂 visual/
+        └── 📄 *.c
 ```
 
 ## Key Components
