@@ -405,15 +405,15 @@ graph TD;
 
 ```mermaid
 flowchart TD
-    A[Start Shell] --> B[Initialize Shell<br/>(setup structures,<br/>env variables)]
+    A[Start Shell] --> B[Initialize Shell (setup structures, env variables)]
     B --> C[Main Loop]
-    C --> D[Display Prompt<br/>and Read Input]
-    D --> E[Parse Input<br/>(tokenize, parse<br/>command & args)]
+    C --> D[Display Prompt and Read Input]
+    D --> E[Parse Input (tokenize, parse command & args)]
     E --> F{Is Built-in Command?}
-    F -->|Yes| G[Execute Built-in<br/>Command]
-    F -->|No| H[Execute External<br/>Command (fork, exec)]
-    H --> I[Handle Redirections<br/>and Pipes]
-    I --> J[Wait for Command<br/>to Complete]
+    F -->|Yes| G[Execute Built-in Command]
+    F -->|No| H[Execute External Command (fork, exec)]
+    H --> I[Handle Redirections and Pipes]
+    I --> J[Wait for Command to Complete]
     J --> K[Output Results]
     K --> C[Repeat Main Loop]
 ```
