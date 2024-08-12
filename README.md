@@ -1,4 +1,4 @@
-# Minishell
+# minishell
 MiniShell (a 42 School project) is a simple UNIX shell implementation written in C. It supports basic shell functionalities including command execution, built-in commands, input parsing, and more. This project serves as a foundational example of how a shell works at a low level. Here's a detailed technical documentation and analysis of the `minishell` project, focusing on its structure and key components such as the parser, lexer, builtins, redirections, pipes, exit status, and memory leak checks.
 
 ***
